@@ -9,7 +9,7 @@ class LoginScreen extends StatefulWidget {
 
 class LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  
+
   @override
   Widget build(context) {
     return Container(
@@ -35,6 +35,15 @@ class LoginScreenState extends State<LoginScreen> {
         labelText: 'Email Address',
         hintText: 'you@example.com',
       ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter email';
+        }
+        if (!value.contains("@")) {
+          return 'Please enter a valid email';
+        }
+        return null;
+      },
     );
   }
 
@@ -45,6 +54,15 @@ class LoginScreenState extends State<LoginScreen> {
         labelText: 'Password',
         hintText: 'Password',
       ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter password';
+        }
+        if (value.length < 4) {
+          return 'Password has to have at least 4 characters';
+        }
+        return null;
+      },
     );
   }
 
@@ -53,7 +71,9 @@ class LoginScreenState extends State<LoginScreen> {
     // ElevatedButton is suggested
     return ElevatedButton(
       onPressed: () {
-        _formKey.currentState!.reset(); 
+        if (_formKey.currentState!.validate()) {
+          _formKey.currentState!.reset();
+        }
       },
       child: Text('Submit'),
     );
