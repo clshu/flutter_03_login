@@ -44,6 +44,9 @@ class LoginScreenState extends State<LoginScreen> {
         }
         return null;
       },
+      onSaved: (value) {
+        print(value);
+      },
     );
   }
 
@@ -63,6 +66,9 @@ class LoginScreenState extends State<LoginScreen> {
         }
         return null;
       },
+      onSaved: (value) {
+        print(value);
+      },
     );
   }
 
@@ -72,6 +78,7 @@ class LoginScreenState extends State<LoginScreen> {
     return ElevatedButton(
       onPressed: () {
         if (_formKey.currentState!.validate()) {
+          _formKey.currentState!.save();
           _formKey.currentState!.reset();
         }
       },
