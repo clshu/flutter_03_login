@@ -1,21 +1,26 @@
 import "package:flutter/material.dart";
 
 class LoginScreen extends StatefulWidget {
-  createState() {
+  @override
+  LoginScreenState createState() {
     return LoginScreenState();
   }
 }
 
 class LoginScreenState extends State<LoginScreen> {
-  build(context) {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  
+  @override
+  Widget build(context) {
     return Container(
       margin: EdgeInsets.all(20.0),
       child: Form(
+        key: _formKey,
         child: Column(
           children: [
             emailField(),
             passwordField(),
-            Container(margin: EdgeInsets.only(bottom:  25.0)),
+            Container(margin: EdgeInsets.only(bottom: 25.0)),
             submitButton(),
           ],
         ),
@@ -24,7 +29,7 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   Widget emailField() {
-    return TextField(
+    return TextFormField(
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         labelText: 'Email Address',
@@ -34,7 +39,7 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   Widget passwordField() {
-    return TextField(
+    return TextFormField(
       obscureText: false, // For instruction pourpose
       decoration: InputDecoration(
         labelText: 'Password',
@@ -48,7 +53,7 @@ class LoginScreenState extends State<LoginScreen> {
     // ElevatedButton is suggested
     return ElevatedButton(
       onPressed: () {
-        print('Submit');
+        _formKey.currentState!.reset(); 
       },
       child: Text('Submit'),
     );
