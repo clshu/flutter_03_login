@@ -14,8 +14,8 @@ class LoginScreenState extends State<LoginScreen> {
         child: Column(
           children: [
             emailField(),
-            // passwordField(),
-            // submitButton(),
+            passwordField(),
+            submitButton(),
           ],
         ),
       ),
@@ -26,13 +26,30 @@ class LoginScreenState extends State<LoginScreen> {
     return TextField(
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
-       labelText: 'Email Address',
-       hintText: 'you@example.com', 
+        labelText: 'Email Address',
+        hintText: 'you@example.com',
       ),
     );
   }
 
-  // Widget passwordField() {}
+  Widget passwordField() {
+    return TextField(
+      obscureText: false, // For instruction pourpose
+      decoration: InputDecoration(
+        labelText: 'Password',
+        hintText: 'Password',
+      ),
+    );
+  }
 
-  // Widget submitButton() {}
+  Widget submitButton() {
+    // RaisedButton is deprecated
+    // ElevatedButton is suggested
+    return ElevatedButton(
+      onPressed: () {
+        print('Submit');
+      },
+      child: Text('Submit'),
+    );
+  }
 }
